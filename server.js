@@ -110,36 +110,6 @@ class LinkedList {
     }
 }
 
-// Node #1
-const node1 = new Node(
-    {   
-        id:1,
-        name:'alex',
-        deposit:5
-    }
-);
-
-//Node #2
-const node2 = new Node(
-    {
-        id:2,
-        name:'sarah',
-        deposit:5
-    }
-);
-
-// Node #3
-const node3 = new Node(
-    {
-        id:3,
-        name:'jim',
-        deposit:15
-    }
-)
-
-// node1.next = node2;
-// node2.next = node3;
-
 let linkedListAccounts = new LinkedList();
 
 linkedListAccounts.append(accounts[0]);
@@ -151,10 +121,13 @@ const addNumbers = (x, y) => {
     return x + y
 }
 
+// Use express.static to serves static files saved in public folder
+app.use(express.static(__dirname + '/public'));
+
 // response with Hello World when the website hit the root endpoint
-app.get('/', function (req, res) {
-    res.send("Hello World");
-})
+// app.get('/', function (req, res) {
+//     res.send("Hello World");
+// })
 
 app.get('/addTwoNumbers', function(req, res) {
     //parse the params into int for mathematical operation
@@ -179,22 +152,6 @@ app.get('/getAccount/:id', function (req, res) {
 })
 
 app.get('/getLinkedListAccount', function (req, res) {
-    // if (linkedListAccounts.head == null) {
-    //     res.send('No account found');
-    //     res.end();
-    // }
-    // // define a var call currentNode to keep track of the LinkedList's element
-    // let currentNode = linkedListAccounts.head;
-
-    // // loop through the list until the last element
-    // while (currentNode != null) {
-    //     if (currentNode.data.id == req.query.id) {
-    //         res.send(currentNode.data);
-    //         res.end()
-    //     }
-    //     // update the currentNode if the desired account was not found
-    //     currentNode = currentNode.next
-    // }
 
     let result = linkedListAccounts.search(req.query.id);
 
@@ -204,9 +161,6 @@ app.get('/getLinkedListAccount', function (req, res) {
     }
     res.send(result.data)
 })
-
-// Use express.static to serves static files saved in public folder
-app.use(express.static('public'))
 
 // the app listens to port 3000
 app.listen(3000);
