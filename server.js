@@ -71,17 +71,20 @@ node2.next = node3;
 
 let linkedListAccounts = new LinkedList(node1);
 
+const addNumbers = (x, y) => {
+    return x + y
+}
 
 // response with Hello World when the website hit the root endpoint
 app.get('/', function (req, res) {
     res.send("Hello World");
 })
 
-app.get('/addTwoNumbers/:x/:y', function(req, res) {
+app.get('/addTwoNumbers', function(req, res) {
     //parse the params into int for mathematical operation
-    let x = parseInt(req.params.x);
-    let y = parseInt(req.params.y);
-    let result = x + y;
+    let x = parseInt(req.query.x);
+    let y = parseInt(req.query.y);
+    let result = addNumbers(x, y);
 
     response = "Result = " + result.toString();
     res.send(response);
